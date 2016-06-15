@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="nbadraftEvaluator">
+  <head>
+    <title>NBA Draft Evaluator</title>
+    <!-- external -->
+    <script src="external/angular.js"></script>
+    <script src="external/angular-ui-router.js"></script>
+    <script src="external/jquery.min.js"></script>
+      <!-- uiBootstrap -->
+      <script src="external/uiBootstrap/ui-bootstrap.js"></script>
+      <script src="external/uiBootstrap/ui-bootstrap-tpls.js"></script>
+      <!-- ngDialog -->
+      <script src="external/ngDialog/ng-dialog.js"></script>
+      <link rel="stylesheet" href="external/ngDialog/ngDialog.min.css"></script>
+      <link rel="stylesheet" href="external/ngDialog/ngDialog-theme-plain.min.css"></script>
+      <link rel="stylesheet" href="external/ngDialog/ngDialog-theme-default.min.css"></script>
+      <!-- bootstrap -->
+      <link rel="stylesheet" href="external/bootstrap/bootstrap.min.css">
+      <link rel="stylesheet" href="external/bootstrap/bootstrap-theme.min.css">
+      <script src="external/bootstrap/bootstrap.min.js"></script>
+      <!-- az.helpers -->
+      <script src="external/azHelpers/az.helpers.js"></script>
+      <link rel="stylesheet" href="external/azHelpers/az.helpers.css">
+
+    <!-- app -->
+    <script src="app.js"></script>
+    <script src="players.value.js"></script>
+  </head>
+  <body>
+    <div class="container" ng-controller="MainCtrl as mainVm">
+      <div class="page-header">
+        <h1>NBA Draft Evaluator</h1>
+      </div>
+
+      <az-debug-toggle></az-debug-toggle>
+
+      <select
+        ng-model="mainVm.year"
+        ng-options="year for year in mainVm.availableYears"
+      ></select>
+
+      <div class="row">
+        <div class="col-xs-6 col-md-4">
+          <ol>
+            <li ng-repeat="userChoice in mainVm.userChoices track by $index">
+              <input
+                type="text"
+                ng-model="mainVm.userChoices[$index]"
+                uib-typeahead="player for player in mainVm.yearlyPlayersDictionary[mainVm.year] | filter:$viewValue"
+              >
+              {{ mainVm.players[mainVm.year] }}
+            </li>
+          </ol>
+        </div>
+        <div class="col-xs-6 col-md-4">
+          <ol>
+            <li ng-repeat="player in mainVm.yearlyPlayersDictionary[mainVm.year]">
+              {{ player }}
+            </li>
+          </ol>
+        </div>
+      </div>
+      <az-debug name="mainVm.yearlyPlayersDictionary" content="mainVm.yearlyPlayersDictionary"></az-debug>
+    </div>
+  </body>
+</html>
