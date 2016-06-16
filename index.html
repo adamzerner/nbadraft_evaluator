@@ -25,6 +25,7 @@
     <!-- app -->
     <script src="app.js"></script>
     <script src="players.value.js"></script>
+    <script src="lower_underscore_case.filter.js"></script>
   </head>
   <body>
     <div class="container" ng-controller="MainCtrl as mainVm">
@@ -32,7 +33,7 @@
         <h1>NBA Draft Evaluator</h1>
       </div>
 
-      <az-debug-toggle></az-debug-toggle>
+      <!-- <az-debug-toggle></az-debug-toggle> -->
 
       <select
         ng-model="mainVm.year"
@@ -42,25 +43,26 @@
       <div class="row">
         <div class="col-xs-6 col-md-4">
           <ol>
-            <li ng-repeat="userChoice in mainVm.userChoices track by $index">
+            <li ng-repeat="userChoice in mainVm.userChoices[mainVm.year] track by $index">
               <input
                 type="text"
-                ng-model="mainVm.userChoices[$index]"
-                uib-typeahead="player for player in mainVm.yearlyPlayersDictionary[mainVm.year] | filter:$viewValue"
+                ng-model="mainVm.userChoices[mainVm.year][$index]"
+                uib-typeahead="player.name for player in mainVm.yearlyPlayersDictionary[mainVm.year] | filter:$viewValue"
               >
               {{ mainVm.players[mainVm.year] }}
             </li>
           </ol>
         </div>
         <div class="col-xs-6 col-md-4">
+          <p>Actual Draft Order:</p>
           <ol>
             <li ng-repeat="player in mainVm.yearlyPlayersDictionary[mainVm.year]">
-              {{ player }}
+              {{ player.name }} {{ player.winSharesPerSeason }}
             </li>
           </ol>
         </div>
       </div>
-      <az-debug name="mainVm.yearlyPlayersDictionary" content="mainVm.yearlyPlayersDictionary"></az-debug>
+      <!-- <az-debug name="mainVm.yearlyPlayersDictionary" content="mainVm.yearlyPlayersDictionary"></az-debug> -->
     </div>
   </body>
 </html>
