@@ -6,13 +6,14 @@
     .controller('MainCtrl', MainCtrl)
   ;
 
-  function MainCtrl(Players, DataService) {
+  function MainCtrl(Players, DataService, WinSharesPerSeasonPerDraftPick) {
     var vm = this;
     vm.draft = '2003';
     vm.drafts = ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'];
     vm.userChoices = constructUserChoices();
     vm.pointsPerDraft = constructPointsPerDraft();
     vm.players = Players;
+    vm.WinSharesPerSeasonPerDraftPick = WinSharesPerSeasonPerDraftPick;
 
     function constructUserChoices() {
       /*
@@ -31,6 +32,7 @@
           userChoices[draft].push({
             name: null,
             points: null,
+            winSharesPerSeason: null,
           });
         }
       });
@@ -55,8 +57,17 @@
 
       return pointsPerDraft;
     }
+    vm.getPickMultiplyer = function (pick) {
+      return DataService._getBenPickMultiplier(pick);
+    };
 
-    vm.setPointsForPick = function (name, yourSpot) {
+    vm.onSelect = function (name, pick) {
+      vm.setPointsForPick(name, pick);
+      vm.setWSPSForPick(name, pick);
+      vm.setPointsForDraft();
+    };
+
+    vm.getPointsForPick = function (name, yourSpot) {
       if (!name) {
         vm.userChoices[vm.draft][yourSpot - 1].points = null;
         return;
@@ -74,8 +85,32 @@
       });
 
       if (vm.userChoices[vm.draft] && vm.userChoices[vm.draft][yourSpot - 1]) {
-        var diff = DataService.getWeightedAWSPSDiff(playerAWSPS, yourSpot, actualSpot);
-        vm.userChoices[vm.draft][yourSpot - 1].points = diff;
+        return DataService.getWeightedAWSPSDiff(playerAWSPS, yourSpot, actualSpot);
+      }
+    };
+
+    vm.setPointsForPick = function (name, yourSpot) {
+      var diff = vm.getPointsForPick(name, yourSpot);
+      vm.userChoices[vm.draft][yourSpot - 1].points = diff;
+    };
+
+    vm.setWSPSForPick = function (name, pick) {
+      if (!name) {
+        vm.userChoices[vm.draft][pick - 1].winSharesPerSeason = null;
+        return;
+      }
+
+      var playerAWSPS;
+
+      Players[vm.draft].forEach(function (playerObj, index) {
+        if (playerObj.name === name) {
+          playerAWSPS = playerObj.winSharesPerSeason;
+          return;
+        }
+      });
+
+      if (vm.userChoices[vm.draft] && vm.userChoices[vm.draft][pick - 1]) {
+        vm.userChoices[vm.draft][pick - 1].winSharesPerSeason = playerAWSPS;
       }
     };
 
@@ -90,12 +125,14 @@
         }
       }
 
-      vm.pointsPerDraft[vm.draft] = totalPoints / choicesMade;
+      if (choicesMade) {
+        vm.pointsPerDraft[vm.draft] = totalPoints / choicesMade;
+      } else {
+        vm.pointsPerDraft[vm.draft] = '';
+      }
     };
 
     vm.getPartialDraftActualPoints = function () {
-      debugger;
-
       var totalPoints = 0;
       var choicesMade = 0;
 
@@ -106,7 +143,9 @@
         }
       }
 
-      return totalPoints / choicesMade;
+      if (choicesMade) {
+        return totalPoints / choicesMade;
+      }
     };
 
     vm.getFullDraftActualPoints = function () {
