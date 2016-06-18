@@ -9,9 +9,9 @@
   function DataService(WinSharesPerSeasonPerDraftPick) {
     var service = {};
 
-    service._getAWSPSDiff = function (playerAWSPS, yourSpot) {
-      var draftPickAWSPS = WinSharesPerSeasonPerDraftPick[yourSpot - 1] || 0;
-      return playerAWSPS - draftPickAWSPS;
+    service._getWSPSDiff = function (playerWSPS, yourSpot) {
+      var draftPickWSPS = WinSharesPerSeasonPerDraftPick[yourSpot - 1] || 0;
+      return playerWSPS - draftPickWSPS;
     };
 
     service._getAdamPickMultiplier = function (yourSpot, actualSpot) {
@@ -30,10 +30,10 @@
       return (adamPickMultiplier * adamWeight) + (benPickMultiplier * benWeight);
     };
 
-    service.getWeightedAWSPSDiff = function (playerAWSPS, yourSpot, actualSpot, adamWeight, benWeight) {
-      var awspsDiff = service._getAWSPSDiff(playerAWSPS, yourSpot);
+    service.getWeightedWSPSDiff = function (playerWSPS, yourSpot, actualSpot, adamWeight, benWeight) {
+      var WSPSDiff = service._getWSPSDiff(playerWSPS, yourSpot);
       var weightedPickMultiplier = service._getWeightedPickMultiplier(yourSpot, actualSpot);
-      return awspsDiff * weightedPickMultiplier;
+      return WSPSDiff * weightedPickMultiplier;
     };
 
     return service;
