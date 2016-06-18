@@ -15,9 +15,9 @@
       <link rel="stylesheet" href="external/ngDialog/ngDialog-theme-plain.min.css"></script>
       <link rel="stylesheet" href="external/ngDialog/ngDialog-theme-default.min.css"></script>
       <!-- bootstrap -->
-      <link rel="stylesheet" href="external/bootstrap/bootstrap.min.css">
-      <link rel="stylesheet" href="external/bootstrap/bootstrap-theme.min.css">
-      <script src="external/bootstrap/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
       <!-- az.helpers -->
       <script src="external/azHelpers/az.helpers.js"></script>
       <link rel="stylesheet" href="external/azHelpers/az.helpers.css">
@@ -57,20 +57,23 @@
               <th>
                 Your Average Points
                 <span
+                  class="glyphicon glyphicon-question-sign"
                   uib-tooltip="Average points for the selections you made. Applies to the draft that is visible."
-                >?</span>
+                ></span>
               </th>
               <th>
                 Partial Draft Average Points
                 <span
+                  class="glyphicon glyphicon-question-sign"
                   uib-tooltip="If you only make selections for picks 1, 2 and 3, it'll average the points for picks 1, 2 and 3 in the actual draft. Applies to the draft that is visible."
-                >?</span>
+                ></span>
               </th>
               <th>
                 Full Draft Average Points
                 <span
+                  class="glyphicon glyphicon-question-sign"
                   uib-tooltip="Average points for all selections made in the actual draft. Applies to the draft that is visible."
-                >?</span>
+                ></span>
               </th>
             </tr>
           </thead>
@@ -97,26 +100,30 @@
                 <th>
                   WSPS
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="Win shares per season"
-                  >?</span>
+                  ></span>
                 </th>
                 <th>
                   Slot WSPS
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="Average win shares per season for people drafted at the corresponding draft position"
-                  >?</span>
+                  ></span>
                 </th>
                 <th>
                   Multiplier
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="Give more weight to higher draft picks"
-                  >?</span>
+                  ></span>
                 </th>
                 <th>
                   Points
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="(WSPS - Slot WSPS) * Multiplier"
-                  >?</span>
+                  ></span>
                 </th>
               </tr>
             </thead>
@@ -131,7 +138,7 @@
                     typeahead-on-select="mainVm.onSelect(userChoice.name, $index + 1)"
                     ng-change="mainVm.onSelect(userChoice.name, $index + 1)"
                     class="form-control"
-                    style="display: inline-block; width: 175px;"
+                    style="display: inline-block; width: 150px;"
                   >
                 </td>
                 <td>{{ userChoice.winSharesPerSeason | number:2 }}</td>
@@ -152,26 +159,30 @@
                 <th>
                   WSPS
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="Win shares per season"
-                  >?</span>
+                  ></span>
                 </th>
                 <th>
                   Slot WSPS
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="Average win shares per season for people drafted at the corresponding draft position"
-                  >?</span>
+                  ></span>
                 </th>
                 <th>
                   Multiplier
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="Give more weight to higher draft picks"
-                  >?</span>
+                  ></span>
                 </th>
                 <th>
                   Points
                   <span
+                    class="glyphicon glyphicon-question-sign"
                     uib-tooltip="(WSPS - Slot WSPS) * Multiplier"
-                  >?</span>
+                  ></span>
                 </th>
               </tr>
             </thead>
