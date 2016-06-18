@@ -54,9 +54,24 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Your Average Points</th>
-              <th>Partial Draft Average Points</th>
-              <th>Full Draft Average Points</th>
+              <th>
+                Your Average Points
+                <span
+                  uib-tooltip="Average points for the selections you made. Applies to the draft that is visible."
+                >?</span>
+              </th>
+              <th>
+                Partial Draft Average Points
+                <span
+                  uib-tooltip="If you only make selections for picks 1, 2 and 3, it'll average the points for picks 1, 2 and 3 in the actual draft. Applies to the draft that is visible."
+                >?</span>
+              </th>
+              <th>
+                Full Draft Average Points
+                <span
+                  uib-tooltip="Average points for all selections made in the actual draft. Applies to the draft that is visible."
+                >?</span>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -79,10 +94,30 @@
               <tr>
                 <th>#</th>
                 <th>Player</th>
-                <th>WSPS</th>
-                <th>Draft Position</th>
-                <th>Multiplier</th>
-                <th>Points</th>
+                <th>
+                  WSPS
+                  <span
+                    uib-tooltip="Win shares per season"
+                  >?</span>
+                </th>
+                <th>
+                  Slot WSPS
+                  <span
+                    uib-tooltip="Average win shares per season for people drafted at the corresponding draft position"
+                  >?</span>
+                </th>
+                <th>
+                  Multiplier
+                  <span
+                    uib-tooltip="Give more weight to higher draft picks"
+                  >?</span>
+                </th>
+                <th>
+                  Points
+                  <span
+                    uib-tooltip="(WSPS - Slot WSPS) * Multiplier"
+                  >?</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -96,7 +131,7 @@
                     typeahead-on-select="mainVm.onSelect(userChoice.name, $index + 1)"
                     ng-change="mainVm.onSelect(userChoice.name, $index + 1)"
                     class="form-control"
-                    style="display: inline-block; width: 200px;"
+                    style="display: inline-block; width: 175px;"
                   >
                 </td>
                 <td>{{ userChoice.winSharesPerSeason | number:2 }}</td>
@@ -114,10 +149,30 @@
               <tr>
                 <th>#</th>
                 <th>Player</th>
-                <th>WSPS</th>
-                <th>Draft Position</th>
-                <th>Multiplier</th>
-                <th>Points</th>
+                <th>
+                  WSPS
+                  <span
+                    uib-tooltip="Win shares per season"
+                  >?</span>
+                </th>
+                <th>
+                  Slot WSPS
+                  <span
+                    uib-tooltip="Average win shares per season for people drafted at the corresponding draft position"
+                  >?</span>
+                </th>
+                <th>
+                  Multiplier
+                  <span
+                    uib-tooltip="Give more weight to higher draft picks"
+                  >?</span>
+                </th>
+                <th>
+                  Points
+                  <span
+                    uib-tooltip="(WSPS - Slot WSPS) * Multiplier"
+                  >?</span>
+                </th>
               </tr>
             </thead>
             <tbody>
